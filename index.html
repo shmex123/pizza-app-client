@@ -4,27 +4,27 @@
 <head>
 </head>
 <body>
+	<pa-menu></pa-menu>
+		<!--
+	<section ng-controller="MenuCtrl" ng-init="list()">
+		<p>{{ menu }}</p>
 
-	<section ng-controller="MenuCtrl">
-		<p>{{ menuItems }}</p>
+
+		<form ng-submit="create(newMenuItem)" novalidate>
+			<input type="text" ng-model="newMenuItem.id" placeholder="id" required/><br/>
+			<input type="text" ng-model="newMenuItem.name" placeholder="name" required/><br/>
+			<label>In Stock?</label><input type="checkbox" ng-model="newMenuItem.inStock" required/><br/>
+			<input type="number" ng-model="newMenuItem.price" placeholder="price" required/><br/>
+			<label>Is Special?</label><input type="checkbox" ng-model="newMenuItem.isSpecial" required/><br/>
+			<input type="submit" value="create"/>
+		</form>
 	</section>
+		-->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-	<script>
-		var server = 'montpelier:10865';
-		var appName = 'pizzaAppClient';
-		var app = angular.module(appName, []);
-		app.controller('MenuCtrl', ['$scope', '$http',
-			function($scope, $http) {
-				$http.get(server + '/menu')
-				.then(function(response) {
-					$scope.menuItems = response.data;
-				});
-			}
-		]);
-		angular.element(document).ready(function() {
-			angular.bootstrap(document, [appName]);
-		});
-	</script>
+	<script src="menu/menu.client.module.js"></script>
+	<script src="menu/menu.client.controller.js"></script>
+	<script src="menu/menu.client.directive.js"></script>
+	<script src="application.js"></script>
 </body>
 </html>
