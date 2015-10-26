@@ -2,6 +2,7 @@
 
 var appName = 'Pizza App';
 var app = angular.module(appName, [
+	'ui.bootstrap',
 	'menu'
 ]);
 

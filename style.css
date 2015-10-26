@@ -1,0 +1,46 @@
+
+
+
+.paMenu {
+	border: 1px solid black;
+	padding-bottom: 20px;
+}
+
+.menuTitleRow {
+}
+
+.menuTitleRow h2 {
+	font-size: 18px;
+	padding-left: 15px;
+	line-height: 18px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid lightgray;
+}
+
+.menuItemRow {
+}
+
+.menuItemRow, .newMenuItemRow, {
+	height: 30px;
+}
+
+.menuItemRow .menuItemOptions {
+	line-height: 30px;
+}
+
+
+.menuItemRow .menuItemName, .menuItemRow .menuItemPrice, .menuItemRow .menuItemOutOfStock, .menuItemRow .menuItemStar {
+	line-height: 30px;
+}
+
+.menuItemRow .menuItemName {
+	size: 1.0em;
+}
+
+.newMenuItemRow {
+	padding-top: 20px;
+}
+
+.newMenuItemRow input {
+	width: 100%;
+}
