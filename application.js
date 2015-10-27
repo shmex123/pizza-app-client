@@ -3,12 +3,14 @@
 var appName = 'Pizza App';
 var app = angular.module(appName, [
 	'ui.bootstrap',
-	'menu'
+	'menu',
+	'order'
 ]);
 
 app.factory('Protocol', function() {
 	return {
-		server: 'http://keeperteacher.com:10105'
+		server: 'http://montpelier.cs.colostate.edu:10105',
+		addMenuItemEvent: 'add-menu-item-event'
 	};
 });
 

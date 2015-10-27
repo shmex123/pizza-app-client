@@ -1,0 +1,52 @@
+
+
+
+<section class="paOrder" ng-controller="OrderCtrl" ng-init="restoreOrder()">
+	<section class="row menuTitleRow">
+		<div class="col-xs-12">
+			<h2 style="menuTitle">My Order</h2>
+		</div>
+	</section>
+	<section class="row" ng-repeat="item in order.lineItems | orderBy: 'item.name'">
+		<div class="col-xs-12 orderRow">
+			<div class="col-xs-1 orderName">
+				<p>{{ item.quantity }}x</p>
+                        </div>
+                        <div class="col-xs-4 orderName">
+                                <p>{{ item.item.name }}</p>
+                        </div>
+                        <div class="col-xs-2">
+                        </div>
+                        <div class="col-xs-2 orderPrice">
+                                <p ng-if="item.item.isSpecial" style="color: #f7ca18;">{{ item.item.price * item.quantity | currency }}</p>
+                                <p ng-if="!item.item.isSpecial">{{ item.item.price * item.quantity | currency }}</p>
+                        </div>
+			<div class="col-xs-3">
+				<div class="col-xs-6">
+					<a href ng-click="increment(item)" style="font-size: 11px;"><span class="glyphicon glyphicon-menu-up"></span></a>
+					<a href ng-click="decrement(item)" style="font-size: 11px;"<span class="glyphicon glyphicon-menu-down"></span></a>
+				</div>
+				<div class="col-xs-6 orderName">
+					<a href ng-click="remove(item)" style="color: red;"><span class="glyphicon glyphicon-remove"></span></a>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="row">
+                <div class="col-xs-12 newMenuItemRow">
+			<div ng-if="!orderEmpty()" style="border-top: 1px solid lightgray; padding-top: 20px;">
+				<div class="col-xs-7 menuItemName">
+					<p>Total:</p>
+				</div>
+				<div class="col-xs-2 menuItemPrice">
+					<p>{{ getTotal() | currency }}</p>
+				</div>
+				<div class="col-xs-3 menuItemSubmit">
+				</div>
+                        </div>
+			<div ng-if="orderEmpty()" class="col-xs-12">
+				<p style="color: lightgray;">There are currently no items on your order.</p>
+			</div>
+                </div>
+        </section>
+</section>

@@ -1,18 +1,22 @@
 
 
 
-<section class="paMenu" ng-controller="MenuCtrl" ng-init="list()">
+<section class="paMenu" ng-controller="MenuCtrl" ng-init="init(true)">
 	<section class="row menuTitleRow">
 		<div class="col-xs-12">
 			<h2 style="menuTitle">Menu</h2>
 		</div>
 	</section>
-	<section class="row" ng-repeat="menuItem in menu">
+	<section class="row" ng-repeat="menuItem in menu | orderBy: 'name'">
 		<div class="col-xs-12 menuItemRow">
+			<div class="col-xs-1 menuItemName">
+				<a href ng-if="menuItem.inStock" ng-click="addToOrder(menuItem)"><span class="glyphicon glyphicon-plus" style="color: #87D37C;"></span></a>
+				<a href ng-if="!menuItem.inStock"><span class="glyphicon glyphicon-plus" style="color: grey;"></span></a>
+			</div>
 			<div class="col-xs-4 menuItemName">
 				<p>{{ menuItem.name }}</p>
 			</div>
-			<div class="col-xs-4 menuItemOutOfStock">
+			<div class="col-xs-3 menuItemOutOfStock">
 				<p ng-if="!menuItem.inStock" style="color: red;">Out of stock!</p>
 			</div>
 			<div class="col-xs-1 menuItemStar">
@@ -22,7 +26,7 @@
 				<p>${{ menuItem.price }}</p>
 			</div>
 			<div class="col-xs-1 menuItemOptions" ng-controller="MenuItemDropdownCtrl">
-				<span ng-if="!shown" uib-dropdown on-toggle="toggled(open)">
+				<span ng-if="shown" uib-dropdown on-toggle="toggled(open)">
 					<a href uib-dropdown-toggle class="menuItemItemOptions"><span class="glyphicon glyphicon-option-vertical"></span></a>
 					<ul class="uib-dropdown-menu dropdown-menu-right">
 						<li ng-if="!menuItem.isSpecial"><a href ng-click="setSpecial(menuItem, true)">Make special</a></li>
@@ -37,15 +41,17 @@
 		</div>
 	</section>
 	<section class="row">
-		<div class="col-xs-12 newMenuItemRow" ng-if="!shown">
-			<div class="col-xs-4 menuItemName">
-				<input type="text" class="nameInput" ng-model="newMenuItem.name" placeholder="Name" required/>
-			</div>
-			<div class="col-xs-4 menuItemPrice">
-				<input type="number" class="priceInput" ng-model="newMenuItem.price" placeholder="Price" required/>
-			</div>
-			<div class="col-xs-4 menuItemSubmit">
-				<input type="submit" class="submitInput" ng-click="create(newMenuItem)" value="Add"/>
+		<div class="col-xs-12 newMenuItemRow" ng-if="shown">
+			<div style="border-top: 1px solid lightgray; padding-top: 20px;">
+				<div class="col-xs-4 menuItemName">
+					<input type="text" class="nameInput" ng-model="newMenuItem.name" placeholder="Name" required/>
+				</div>
+				<div class="col-xs-4 menuItemPrice">
+					<input type="number" class="priceInput" ng-model="newMenuItem.price" placeholder="Price" required/>
+				</div>
+				<div class="col-xs-4 menuItemSubmit">
+					<input type="submit" class="submitInput" ng-click="create(newMenuItem)" value="Add"/>
+				</div>
 			</div>
 		</div>
 	</section>

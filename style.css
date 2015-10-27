@@ -1,7 +1,7 @@
 
 
 
-.paMenu {
+.paMenu, .paOrder {
 	border: 1px solid black;
 	padding-bottom: 20px;
 }
@@ -26,6 +26,16 @@
 
 .menuItemRow .menuItemOptions {
 	line-height: 30px;
+}
+
+
+.orderRow {
+	height: 40px;
+}
+
+.orderRow .orderName, .orderRow .orderPrice {
+	line-height: 40px;
+	white-space: nowrap;
 }
 
 

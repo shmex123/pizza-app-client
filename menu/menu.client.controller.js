@@ -1,9 +1,14 @@
 
 
 
-angular.module('menu').controller('MenuCtrl', ['$scope', '$http', 'Protocol', 
-	function($scope, $http, Protocol) {
+angular.module('menu').controller('MenuCtrl', ['$scope', '$rootScope', '$http', 'Protocol', 
+	function($scope, $rootScope, $http, Protocol) {
 		$scope.newMenuItem = {};
+
+		$scope.init = function(shown) {
+			$scope.shown = shown;
+			$scope.list();
+		};
 		$scope.list = function() {
 			$http.get(Protocol.server + '/menu')
 			.then(function(response) {
@@ -49,6 +54,10 @@ angular.module('menu').controller('MenuCtrl', ['$scope', '$http', 'Protocol',
 			.then(function(response) {
 
 			});
+		};
+
+		$scope.addToOrder = function(menuItem) {
+			$rootScope.$broadcast(Protocol.addMenuItemEvent, { item: menuItem });
 		};
 	}
 ]);
