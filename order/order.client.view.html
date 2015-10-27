@@ -42,11 +42,69 @@
 					<p>{{ getTotal() | currency }}</p>
 				</div>
 				<div class="col-xs-3 menuItemSubmit">
+					<a href ng-if="!isPaying" ng-click="submitOrder()" class="btn btn-success" style="width: 100%;">Place Order</a>
+					<a href ng-if="isPaying" ng-click="cancelOrder()" class="btn btn-danger" style="width: 100%;">Cancel</a>
 				</div>
                         </div>
 			<div ng-if="orderEmpty()" class="col-xs-12">
 				<p style="color: lightgray;">There are currently no items on your order.</p>
 			</div>
                 </div>
+        </section>
+	<section ng-if="isPaying" ng-controller="PaymentCtrl" ng-init="init()">
+		<section class="row" ng-repeat="pmt in order.transactions | orderBy: 'paymentType'">
+                <div class="col-xs-12 orderRow">
+                        <div class="col-xs-7 orderName">
+                                <p>{{ pmt.paymentType }}</p>
+                        </div>
+                        <div class="col-xs-2 orderName">
+                                <p>{{ pmt.amount | currency }}</p>
+                        </div>
+                        <div class="col-xs-3" style="line-height: 40px;">
+				<a href ng-click="removePayment(pmt)" style="color: red; padding-left: 45%;"><span class="glyphicon glyphicon-remove"></span></a>
+                        </div>
+                </div>
+        	</section>
+		<section class="row">
+			<div class="col-xs-12 newMenuItemRow">
+				<div style="border-top: 1px solid lightgray; padding-top: 20px;">
+				<div class="col-xs-7 orderName">
+					<p>Balance:</p>
+				</div>
+				<div class="col-xs-2 orderName">
+					<p ng-if="paymentBalance() > 0" style="color: red;">{{ paymentBalance() | currency }}</p>
+					<p ng-if="paymentBalance() <= 0" style="color: #87D37C;">{{ paymentBalance() | currency }}</p>
+				</div>
+				</div>
+			</div>
+		</section>
+		<section class="row">
+			<div class="col-xs-12 newMenuItemRow">
+				<div class="col-xs-7 orderName">
+					<p style="color: lightgray;">Tip:</p>
+				</div>
+				<div class="col-xs-2 orderName">
+					<p style="color: #f7ca18;">{{ paymentTip() | currency }}</p>
+				</div>
+				<div class="col-xs-3 orderName">
+					<a href ng-if="paymentBalance() <= 0" ng-click="completeOrder(order)" class="btn btn-success" style="width: 100%;">Submit</a>
+				</div>
+			</div>
+		</section>
+		<section class="row">
+			<div class="col-xs-12 newMenuItemRow">
+				<div style="border-top: 1px solid lightgray; padding-top: 20px;">
+					<div class="col-xs-6 menuItemName">
+						<select class="form-control" ng-model="newPayment.paymentType" ng-options="type for type in paymentTypes"></select>
+					</div>
+					<div class="col-xs-4 menuItemName">
+						<input type="number" class="form-control" ng-model="newPayment.amount" placeholder="Amount"/>
+					</div>
+					<div class="col-xs-2 menuItemName">
+						<a href ng-click="addPayment(newPayment)" class="btn btn-primary">Add</a>
+					</div>
+				</div>
+			</div>
+		</section>
         </section>
 </section>

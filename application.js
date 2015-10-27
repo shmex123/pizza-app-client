@@ -4,7 +4,8 @@ var appName = 'Pizza App';
 var app = angular.module(appName, [
 	'ui.bootstrap',
 	'menu',
-	'order'
+	'order',
+	'payment'
 ]);
 
 app.factory('Protocol', function() {

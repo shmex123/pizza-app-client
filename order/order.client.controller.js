@@ -6,18 +6,20 @@ angular.module('order').controller('OrderCtrl', ['$scope', '$http', 'Protocol',
 
 		$scope.restoreOrder = function() {
 			//localStorage.removeItem('orderId');
-			if(!localStorage.orderId) {
+			//if(!localStorage.orderId) {
 				$http.post(Protocol.server + '/orders', {})
 				.then(function(response) {
 					$scope.order = response.data;
 					localStorage.orderId = $scope.order.id;
 				});
+			/*
 			} else {
 				$http.get(Protocol.server + '/orders/' + localStorage.orderId)
 				.then(function(response) {
 					$scope.order = response.data;
 				});
 			}
+			*/
 		};
 
 		$scope.list = function() {
@@ -31,6 +33,7 @@ angular.module('order').controller('OrderCtrl', ['$scope', '$http', 'Protocol',
 		$scope.update = function() {
 			$http.put(Protocol.server + '/orders/' + $scope.order.id, $scope.order)
 			.then(function(response) {
+				$scope.order = response.data;
 			});
 		};
 
@@ -101,6 +104,23 @@ angular.module('order').controller('OrderCtrl', ['$scope', '$http', 'Protocol',
 				}
 				$scope.update();
 			}
+		};
+
+		$scope.submitOrder = function() {
+			$scope.isPaying = true;
+		};
+		$scope.cancelOrder = function() {
+			$scope.isPaying = false;
+		};
+
+		$scope.completeOrder = function(order) {
+			$http.put(Protocol.server + '/orders/' + order.id, order);
+			$scope.clearOrder();
+		};
+		
+		$scope.clearOrder = function() {
+			$scope.isPaying = false;
+			$scope.restoreOrder();
 		};
 	}
 ]);
