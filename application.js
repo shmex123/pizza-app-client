@@ -5,7 +5,9 @@ var app = angular.module(appName, [
 	'ui.bootstrap',
 	'menu',
 	'order',
-	'payment'
+	'payment',
+	'summary',
+	'work'
 ]);
 
 app.factory('Protocol', function() {
@@ -14,6 +16,16 @@ app.factory('Protocol', function() {
 		addMenuItemEvent: 'add-menu-item-event'
 	};
 });
+
+app.controller('MainCtrl', ['$scope',
+	function($scope) {
+		$scope.userTypes = ['Cashier', 'Cook', 'Customer', 'Manager'];
+		$scope.selectedUser = $scope.userTypes[0];
+		$scope.setSelectedUser = function(userType) {
+			$scope.selectedUser = userType;
+		};
+	}
+]);
 
 angular.element(document).ready(function() {
 	angular.bootstrap(document, [appName]);

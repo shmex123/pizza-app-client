@@ -5,8 +5,7 @@ angular.module('menu').controller('MenuCtrl', ['$scope', '$rootScope', '$http', 
 	function($scope, $rootScope, $http, Protocol) {
 		$scope.newMenuItem = {};
 
-		$scope.init = function(shown) {
-			$scope.shown = shown;
+		$scope.init = function() {
 			$scope.list();
 		};
 		$scope.list = function() {

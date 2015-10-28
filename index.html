@@ -5,12 +5,51 @@
 	<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
 	<link type="text/css" rel="stylesheet" href="style.css"/>
 </head>
-<body>
+<body ng-controller="MainCtrl">
+	
+	<nav class="navbar navbar-default" role="navigation">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" ng-click="navbarCollapsed = !navbarCollapsed">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">
+				Pizza App
+			</a>
+		</div>
 
-	<section class="container">
+		<div class="collapse navbar-collapse" collapse="navbarCollapsed">
+			<ul class="nav navbar-nav navbar-right">
+				<li dropdown>
+					<a href dropdown-toggle>{{ selectedUser }} <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li ng-repeat="userType in userTypes"><a href ng-click="setSelectedUser(userType)">{{ userType }}</a></li>
+					</ul>
+				</li>
+
+			</ul>
+		</div>
+	</nav>
+
+	<section class="container" ng-if="selectedUser == 'Cashier' || selectedUser == 'Customer'">
 		<div class="row">
-		<pa-menu class="col-xs-12 col-sm-6"></pa-menu>
+		<pa-menu class="col-xs-12 col-sm-6" editable="false"></pa-menu>
 		<pa-order class="col-xs-12 col-sm-6"></pa-order>
+		</div>
+	</section>
+	<section class="container" ng-if="selectedUser == 'Manager'">
+		<div class="row">
+		<pa-menu class="col-xs-12 col-sm-6" editable="true"></pa-menu>
+		<pa-summary class="col-xs-12 col-sm-6"></pa-summary>
+		</div>
+	</section>
+	<section class="container" ng-if="selectedUser == 'Cook'">
+		<div class="row">
+		<pa-menu class="col-xs-12 col-sm-6" editable="false"></pa-menu>
+		<pa-work class="col-xs-12 col-sm-6"></pa-work>
 		</div>
 	</section>
 
@@ -28,6 +67,14 @@
 
 	<script src="payment/payment.client.module.js"></script>
 	<script src="payment/payment.client.controller.js"></script>
+
+	<script src="summary/summary.client.module.js"></script>
+	<script src="summary/summary.client.controller.js"></script>
+	<script src="summary/summary.client.directive.js"></script>
+
+	<script src="work/work.client.module.js"></script>
+	<script src="work/work.client.controller.js"></script>
+	<script src="work/work.client.directive.js"></script>
 
 	<script src="application.js"></script>
 </body>

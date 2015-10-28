@@ -1,0 +1,29 @@
+
+
+
+<section class="paSummary" ng-controller="SummaryCtrl" ng-init="list()">
+	<section class="row menuTitleRow">
+		<div class="col-xs-12">
+			<h2 style="menuTitle">Order Summary</h2>
+		</div>
+	</section>
+	<section class="row">
+		<div class="col-xs-12">
+		<table class="table" ng-if="orders.length > 0">
+			<th>Id</th>
+			<th>Date</th>
+			<th>Type</th>
+			<th>Status</th>
+			<tr ng-repeat="order in orders | orderBy: '-timestamp'">
+				<td>{{ order.id | limitTo: 4 }}...</td>
+				<td>{{ order.timestamp * 1000 | date: 'medium' }}</td>
+				<td ng-if="order.isDelivery">Delivery</td>
+				<td ng-if="!order.isDelivery">Dine In</td>
+				<td>{{ order.status }}</td>
+			</tr>
+		</table>
+
+		<p class="col-xs-12" style="color: lightgray;" ng-if="orders.length <= 0">No orders in summary.</p>
+		</div>
+	</section>
+</section>

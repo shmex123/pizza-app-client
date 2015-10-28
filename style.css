@@ -1,7 +1,7 @@
 
 
 
-.paMenu, .paOrder {
+.paMenu, .paOrder, .paSummary, .paWork {
 	border: 1px solid black;
 	padding-bottom: 20px;
 }

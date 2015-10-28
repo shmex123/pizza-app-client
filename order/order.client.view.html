@@ -4,7 +4,9 @@
 <section class="paOrder" ng-controller="OrderCtrl" ng-init="restoreOrder()">
 	<section class="row menuTitleRow">
 		<div class="col-xs-12">
-			<h2 style="menuTitle">My Order</h2>
+			<h2 class="menuTitle">My Order
+				<a href ng-click="delete()" ng-if="!!order" style="color: red; font-size: 12px; right: 50px; position: absolute;">Clear</a>
+			</h2>
 		</div>
 	</section>
 	<section class="row" ng-repeat="item in order.lineItems | orderBy: 'item.name'">
@@ -46,8 +48,11 @@
 					<a href ng-if="isPaying" ng-click="cancelOrder()" class="btn btn-danger" style="width: 100%;">Cancel</a>
 				</div>
                         </div>
-			<div ng-if="orderEmpty()" class="col-xs-12">
+			<div ng-if="orderEmpty() && !orderNull()" class="col-xs-12">
 				<p style="color: lightgray;">There are currently no items on your order.</p>
+			</div>
+			<div ng-if="orderNull()" class="col-xs-12">
+				<a href ng-click="create()" class="btn btn-success">Start Order</a>
 			</div>
                 </div>
         </section>
@@ -88,6 +93,12 @@
 				</div>
 				<div class="col-xs-3 orderName">
 					<a href ng-if="paymentBalance() <= 0" ng-click="completeOrder(order)" class="btn btn-success" style="width: 100%;">Submit</a>
+				</div>
+				<div class="col-xs-3 orderName">
+					<p>Delivery</p>
+				</div>
+				<div class="col-xs-9 orderName">
+					<input type="checkbox" ng-model="order.isDelivery"/>
 				</div>
 			</div>
 		</section>
