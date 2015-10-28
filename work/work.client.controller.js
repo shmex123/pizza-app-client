@@ -18,7 +18,6 @@ angular.module('work').controller('WorkCtrl', ['$scope', '$http', 'Protocol',
 			order.status = 'FULFILLED';
 			$http.put(Protocol.server + '/orders/' + order.id + '/fulfilled', order)
 			.then(function(response) {
-				alert(JSON.stringify(response.data));
 				$scope.list();
 			});
 		};
