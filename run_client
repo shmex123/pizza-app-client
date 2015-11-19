@@ -1,0 +1,5 @@
+#!/bin/bash
+
+
+chmod -R 755 ~/pizza-app-client
+ln -s ~/pizza-app-client ~/public_html
